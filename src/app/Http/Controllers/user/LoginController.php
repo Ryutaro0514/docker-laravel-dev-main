@@ -16,7 +16,7 @@ class LoginController extends Controller
         $user=$request->only("name","password");
         if(Auth::attempt($user)){
             $request->session()->regenerate();
-            return redirect(route(""));
+            return redirect(route("user.index"));
         }
         return back()->with(["message"=>"アカウントまたはパスワードが間違っています"]);
     }
