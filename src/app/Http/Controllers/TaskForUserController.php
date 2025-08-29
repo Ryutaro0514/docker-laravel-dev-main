@@ -58,7 +58,8 @@ class TaskForUserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $task=Task::find($id);
+        return view("user.edit",compact("task"));
     }
 
     /**
@@ -66,7 +67,18 @@ class TaskForUserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            "title"=>"required"
+        ],[
+            "title.required"=>"タイトルが未入力です"
+        ]);
+        $task=Task::find($id);
+        $task->update([
+            "title"=>$request->title,
+            "description"=>$request->description?$request->description:null,
+            "completed"=>$request->completed
+        ]);
+            return redirect(route("user.index"));
     }
 
     /**
@@ -77,5 +89,10 @@ class TaskForUserController extends Controller
         $task=Task::find($id);
         $task->delete();
         return redirect(route("user.index"));
+    }
+
+    public function complete(string $id)
+    {
+        
     }
 }

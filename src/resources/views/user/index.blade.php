@@ -5,6 +5,7 @@
 
 @section('content')
 <a href="{{route("user.create")}}" class="btn btn-primary">新規作成</a>
+<a href="{{route("user.signout")}}" class="btn btn-danger">ログアウト</a>
     <table class="table">
         <tr>
             <th>
@@ -32,7 +33,7 @@
                     {{$item->description}}
                 </td>
                 <td>
-                    <a href=""><button class="btn btn-success">編集</button></a>
+                    <a href="{{route("user.edit",$item->id)}}"><button class="btn btn-success">編集</button></a>
                 </td>
                 <td>
                     <form action="{{route("user.destroy",$item->id)}}" method="post">
@@ -42,7 +43,11 @@
                     </form>
                 </td>
                 <td>
+                    <form action="{{route("user.complete",$item->id)}}" method="POST">
+                        @csrf
+                        @method("patch")
                     <button class="btn">{{$item->completed?"完了":"未完了"}}</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
