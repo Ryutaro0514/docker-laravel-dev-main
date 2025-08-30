@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    //
     public function create(){
         return view("user_create");
     }
@@ -17,6 +16,6 @@ class UserController extends Controller
             "name"=>$request->name,
             "password"=>Hash::make($request->password)
         ]);
-        return redirect(route("user.signin"));
+        return redirect(route("login"));
     }
 }

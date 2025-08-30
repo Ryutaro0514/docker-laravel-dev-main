@@ -1,11 +1,11 @@
-@extends("app")
+@extends('app')
 @section('title')
     user一覧画面
 @endsection
 
 @section('content')
-<a href="{{route("user.create")}}" class="btn btn-primary">新規作成</a>
-<a href="{{route("user.signout")}}" class="btn btn-danger">ログアウト</a>
+    <a href="{{ route('user.create') }}" class="btn btn-primary">新規作成</a>
+    <a href="{{ route('user.signout') }}" class="btn btn-danger">ログアウト</a>
     <table class="table">
         <tr>
             <th>
@@ -15,7 +15,7 @@
                 説明文
             </th>
             <th>
-                
+
             </th>
             <th>
 
@@ -27,26 +27,26 @@
         @foreach ($tasks as $item)
             <tr>
                 <td>
-                    {{$item->title}}
+                    {{ $item->title }}
                 </td>
                 <td>
-                    {{$item->description}}
+                    {{ $item }}
                 </td>
                 <td>
-                    <a href="{{route("user.edit",$item->id)}}"><button class="btn btn-success">編集</button></a>
+                    <a href="{{ route('user.edit', $item->id) }}"><button class="btn btn-success">編集</button></a>
                 </td>
                 <td>
-                    <form action="{{route("user.destroy",$item->id)}}" method="post">
+                    <form action="{{ route('user.destroy', $item->id) }}" method="post">
                         @csrf
-                        @method("delete")
+                        @method('delete')
                         <button class="btn btn-danger">消去</button>
                     </form>
                 </td>
                 <td>
-                    <form action="{{route("user.complete",$item->id)}}" method="POST">
+                    <form action="{{ route('user.complete', $item->id) }}" method="POST">
                         @csrf
-                        @method("patch")
-                    <button class="btn">{{$item->completed?"完了":"未完了"}}</button>
+                        @method('patch')
+                        <button class="btn">{{ $item->completed ? '完了' : '未完了' }}</button>
                     </form>
                 </td>
             </tr>

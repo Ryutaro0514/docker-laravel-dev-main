@@ -37,6 +37,7 @@ class TaskForUserController extends Controller
             "title.required"=>"タイトルが未入力です"
         ]);
         // dd($request->description?$request->description:null);
+        
         Task::query()->create([
             "title"=>$request->title,
             "description"=>$request->description?$request->description:null,

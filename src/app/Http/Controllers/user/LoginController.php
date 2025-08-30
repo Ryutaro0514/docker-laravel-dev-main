@@ -23,6 +23,6 @@ class LoginController extends Controller
     public function signout(Request $request){
         Auth::logout();
         $request->session()->flush();
-        return redirect(route("user.signin"));
+        return redirect(route("login"));
     }
 }
