@@ -15,7 +15,6 @@ class TaskForUserController extends Controller
     {
         $tasks=Task::get();
         return view("user.index",compact("tasks"));
-
     }
 
     /**

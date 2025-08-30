@@ -4,6 +4,7 @@
 @endsection
 
 @section('content')
+    <h1>user一覧画面</h1>
     <a href="{{ route('user.create') }}" class="btn btn-primary">新規作成</a>
     <a href="{{ route('user.signout') }}" class="btn btn-danger">ログアウト</a>
     <table class="table">
@@ -30,7 +31,7 @@
                     {{ $item->title }}
                 </td>
                 <td>
-                    {{ $item }}
+                    {{ $item->description }}
                 </td>
                 <td>
                     <a href="{{ route('user.edit', $item->id) }}"><button class="btn btn-success">編集</button></a>
@@ -39,7 +40,7 @@
                     <form action="{{ route('user.destroy', $item->id) }}" method="post">
                         @csrf
                         @method('delete')
-                        <button class="btn btn-danger">消去</button>
+                        <button class="btn btn-danger">削除</button>
                     </form>
                 </td>
                 <td>
