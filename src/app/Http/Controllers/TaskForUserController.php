@@ -93,6 +93,10 @@ class TaskForUserController extends Controller
 
     public function complete(string $id)
     {
-        
+        $task=Task::find($id);
+            $task->update([
+                "completed"=>!$task->completed
+            ]);
+        return redirect(route("user.index"));
     }
 }

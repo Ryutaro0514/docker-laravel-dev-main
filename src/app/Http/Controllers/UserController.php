@@ -12,6 +12,13 @@ class UserController extends Controller
         return view("user_create");
     }
     public function store(Request $request){
+        $request->validate([
+            "name"=>["regex:/^[a-zA-Z0-9]{6,15}$/","required"],
+            "password"=>["required","regex:/^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!-\/:-@[-`{-~])[!-~]{8,}$/"]
+        ],[
+            "name"=>"名前の入力方法が違います",
+            "password"=>"パスワードの入力方法が違います"
+        ]);
         User::query()->create([
             "name"=>$request->name,
             "password"=>Hash::make($request->password)

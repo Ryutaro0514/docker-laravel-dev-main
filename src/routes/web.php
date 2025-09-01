@@ -19,3 +19,4 @@ Route::middleware(["auth", "cache.headers:no_store;max_age=0"])->group(function(
     Route::get('/signout',[LoginController::class,"signout"])->name("user.signout");
     Route::patch('/complete/{id}',[TaskForUserController::class,"complete"])->name("user.complete");
 });
+

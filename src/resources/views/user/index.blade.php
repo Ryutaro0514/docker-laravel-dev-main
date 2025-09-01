@@ -1,10 +1,10 @@
 @extends('app')
 @section('title')
-    user一覧画面
+    一覧画面
 @endsection
 
 @section('content')
-    <h1>user一覧画面</h1>
+    <h1>一覧画面</h1>
     <a href="{{ route('user.create') }}" class="btn btn-primary">新規作成</a>
     <a href="{{ route('user.signout') }}" class="btn btn-danger">ログアウト</a>
     <table class="table">

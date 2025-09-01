@@ -9,4 +9,7 @@
         <input name="password" type="password" placeholder="パスワード">
         <button class="btn btn-primary">作成</button>
     </form>
+    @if ($errors->any())
+        <p class="text-danger">{{$errors->first()}}</p>
+    @endif
 @endsection
