@@ -13,8 +13,8 @@ class TaskForUserController extends Controller
      */
     public function index()
     {
-        $tasks=Task::get();
-        return view("user.index",compact("tasks"));
+        $tasks = Task::get();
+        return view("user.index", compact("tasks"));
     }
 
     /**
@@ -31,16 +31,16 @@ class TaskForUserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "title"=>"required"
-        ],[
-            "title.required"=>"タイトルが未入力です"
+            "title" => "required"
+        ], [
+            "title.required" => "タイトルが未入力です"
         ]);
         // dd($request->description?$request->description:null);
-        
+
         Task::query()->create([
-            "title"=>$request->title,
-            "description"=>$request->description?$request->description:null,
-            "author_id"=>1
+            "title" => $request->title,
+            "description" => $request->description ? $request->description : null,
+            "author_id" => Auth::id()
         ]);
         return redirect(route("user.index"));
     }
@@ -58,8 +58,8 @@ class TaskForUserController extends Controller
      */
     public function edit(string $id)
     {
-        $task=Task::find($id);
-        return view("user.edit",compact("task"));
+        $task = Task::find($id);
+        return view("user.edit", compact("task"));
     }
 
     /**
@@ -68,17 +68,17 @@ class TaskForUserController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            "title"=>"required"
-        ],[
-            "title.required"=>"タイトルが未入力です"
+            "title" => "required"
+        ], [
+            "title.required" => "タイトルが未入力です"
         ]);
-        $task=Task::find($id);
+        $task = Task::find($id);
         $task->update([
-            "title"=>$request->title,
-            "description"=>$request->description?$request->description:null,
-            "completed"=>$request->completed
+            "title" => $request->title,
+            "description" => $request->description ? $request->description : null,
+            "completed" => $request->completed
         ]);
-            return redirect(route("user.index"));
+        return redirect(route("user.index"));
     }
 
     /**
@@ -86,17 +86,17 @@ class TaskForUserController extends Controller
      */
     public function destroy(string $id)
     {
-        $task=Task::find($id);
+        $task = Task::find($id);
         $task->delete();
         return redirect(route("user.index"));
     }
 
     public function complete(string $id)
     {
-        $task=Task::find($id);
-            $task->update([
-                "completed"=>!$task->completed
-            ]);
+        $task = Task::find($id);
+        $task->update([
+            "completed" => !$task->completed
+        ]);
         return redirect(route("user.index"));
     }
 }
